@@ -1,26 +1,26 @@
 function create2DArray(rows, cols) {
-  let array = new Array(rows);
-  for (let i = 0; i < rows; i++) {
-    array[i] = new Array(cols).fill(null);
-  }
-  return array;
+    let array = new Array(rows);
+    for (let i = 0; i < rows; i++) {
+        array[i] = new Array(cols).fill(null);
+    }
+    return array;
 }
 
 Vue.component('tetris-table', {
-  data: function () {
-    return {
-      board: this.contents
-    }
-  },
-  props: {
-    contents: Array
-  },
-  methods: {
-    update(newTable) {
-      this.board = newTable;
-    }
-  },
-  template: `
+    data: function () {
+        return {
+           board: this.contents
+        }
+    },
+    props: {
+        contents: Array
+    },
+    methods: {
+        update(newTable) {
+            this.board = newTable;
+        }
+    },
+    template: `
 <table class="board-table">
   <tbody>
     <tr v-for="row in board">
