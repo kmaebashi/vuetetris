@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Vue.js Tetris</title>
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+<link rel="stylesheet" type="text/css" href="tetris.css">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<script type="text/javascript" src="tetris.js"></script>
+</head>
+  <h1>Vue.js版 テトリス風ゲーム</h1>
+  <div class="wrapper-container" id="wrapper-container">
+    <span class="tetris-container">
+      <div id="tetris-main-board">
+        <tetris-table ref="mainBoard" v-bind:contents="mainTable"></tetris-table>
+      </div>
+      <span class="tetris-panel-container">
+        <p>Next:</p>
+        <div id="tetris-next-board">
+          <tetris-table ref="nextBoard" v-bind:contents="nextTable"></tetris-table>
+        </div>
+        <p>LINES:<span id="lines">0</span></p>
+        <p><span id="message"></span></p>
+        <div class="tetris-panel-container-padding"></div>
+        <table class="tetris-button-panel">
+          <tr>
+            <td></td>
+            <td id="tetris-rotate-button" class="tetris-button">↻</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td id="tetris-move-left-button"class="tetris-button">←</td>
+            <td id="tetris-fall-button"class="tetris-button">↓</td>
+            <td id="tetris-move-right-button"class="tetris-button">→</td>
+          </tr>
+        </table>
+      </span>
+    </span>
+  </div>
+  <script>
+    const vm = new Vue({
+                   el: '#wrapper-container',
+                   data: {
+                     mainTable: create2DArray(20, 10),
+                     nextTable: create2DArray(6, 6)
+                   },
+                   methods: {
+                     update(mainTable, nextTable) {
+                       console.log("updated.");
+                       console.log(mainTable);
+                       this.mainTable = mainTable;
+                       this.nextTable = nextTable;
+                       const main = this.$refs.mainBoard;
+                       main.update(mainTable);
+                       const next = this.$refs.nextBoard;
+                       next.update(nextTable);
+                     }
+                   }
+                 });
+    const tetris = new Tetris();
+    tetris.startGame();
+  </script>
+<body>
+</html>
